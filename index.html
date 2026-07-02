@@ -990,6 +990,7 @@
   .quesadilla-layer.cheese { z-index: 2; }
   .quesadilla-layer.meat { z-index: 3; }
   .quesadilla-layer.tortilla-top { z-index: 4; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35)); }
+  .quesadilla-layer.toppings { z-index: 5; }
 
   @media (max-width: 860px) {
     nav.desktop-nav { display: none; }
@@ -1085,6 +1086,7 @@
         <li data-step="1"><span class="n">2</span> Melted Cheese</li>
         <li data-step="2"><span class="n">3</span> Seasoned Meat</li>
         <li data-step="3"><span class="n">4</span> Top Tortilla</li>
+        <li data-step="4"><span class="n">5</span> Fresh Toppings</li>
       </ul>
     </div>
     <div class="quesadilla-stage">
@@ -1170,6 +1172,31 @@
             <line x1="120" y1="60" x2="440" y2="380"/>
             <line x1="170" y1="20" x2="470" y2="320"/>
             <line x1="20" y1="170" x2="320" y2="470"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="quesadilla-layer toppings" data-layer="4">
+        <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M95,175 Q145,135 195,175 Q245,135 295,175 Q335,145 365,170" fill="none" stroke="#f7f2e6" stroke-width="15" stroke-linecap="round" opacity="0.92"/>
+          <path d="M110,265 Q165,235 220,268 Q275,235 330,265" fill="none" stroke="#f7f2e6" stroke-width="15" stroke-linecap="round" opacity="0.92"/>
+          <g fill="#d1453b" stroke="#7a231d" stroke-width="2.5">
+            <rect x="170" y="140" width="16" height="16" rx="2" transform="rotate(15 178 148)"/>
+            <rect x="270" y="160" width="16" height="16" rx="2" transform="rotate(-20 278 168)"/>
+            <rect x="305" y="240" width="16" height="16" rx="2" transform="rotate(25 313 248)"/>
+            <rect x="250" y="310" width="16" height="16" rx="2" transform="rotate(-15 258 318)"/>
+            <rect x="170" y="290" width="16" height="16" rx="2" transform="rotate(10 178 298)"/>
+            <rect x="130" y="230" width="16" height="16" rx="2" transform="rotate(-25 138 238)"/>
+          </g>
+          <g fill="#4c7a3d">
+            <circle cx="205" cy="195" r="4"/>
+            <circle cx="255" cy="205" r="3.5"/>
+            <circle cx="230" cy="230" r="4"/>
+            <circle cx="190" cy="245" r="3.5"/>
+            <circle cx="280" cy="240" r="4"/>
+            <circle cx="245" cy="270" r="3.5"/>
+            <circle cx="200" cy="215" r="3"/>
+            <circle cx="290" cy="285" r="3.5"/>
           </g>
         </svg>
       </div>
