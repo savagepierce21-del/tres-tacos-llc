@@ -884,12 +884,14 @@
   .assembly-pin {
     position: relative;
     height: 420vh;
+    height: 420dvh;
   }
 
   .assembly-sticky {
     position: sticky;
     top: 0;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     display: grid;
     grid-template-columns: 0.85fr 1.15fr;
@@ -1019,9 +1021,9 @@
     .location-wrap { grid-template-columns: 1fr; }
     .about { grid-template-columns: 1fr; }
     .catering { padding: 2.5rem 1.5rem; }
-    .assembly-sticky { grid-template-columns: 1fr; padding-top: 2rem; }
+    .assembly-sticky { grid-template-columns: 1fr; padding-top: 1rem; align-content: center; gap: 1rem; }
     .assembly-steps { display: none; }
-    .taco-stage { height: 46vh; }
+    .taco-stage { height: 40vh; height: 40dvh; max-height: 320px; }
   }
 </style>
 </head>
