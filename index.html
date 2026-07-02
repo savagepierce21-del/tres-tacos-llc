@@ -978,30 +978,20 @@
   .taco-shell-svg {
     position: absolute;
     width: 100%;
-    max-width: 480px;
+    max-width: 400px;
     left: 50%;
-    bottom: 6%;
+    bottom: 8%;
     transform: translateX(-50%);
     z-index: 0;
     filter: drop-shadow(0 20px 30px rgba(0,0,0,0.45));
   }
 
-  .taco-shell-front-svg {
-    position: absolute;
-    width: 100%;
-    max-width: 460px;
-    left: 50%;
-    bottom: 9%;
-    transform: translateX(-50%);
-    z-index: 10;
-  }
-
   .taco-layer {
     position: absolute;
     left: 50%;
-    bottom: 12%;
+    bottom: 14%;
     width: 100%;
-    max-width: 430px;
+    max-width: 340px;
     transform: translate(-50%, -160px);
     opacity: 0;
     will-change: transform, opacity;
@@ -1009,11 +999,11 @@
 
   .taco-layer svg { display: block; width: 100%; height: auto; }
 
-  .taco-layer.meat { z-index: 1; bottom: 10%; }
-  .taco-layer.cheese { z-index: 2; bottom: 14%; }
-  .taco-layer.lettuce { z-index: 3; bottom: 18%; }
-  .taco-layer.pico { z-index: 4; bottom: 24%; }
-  .taco-layer.crema { z-index: 5; bottom: 30%; }
+  .taco-layer.meat { z-index: 1; bottom: 14%; }
+  .taco-layer.cheese { z-index: 2; bottom: 19%; }
+  .taco-layer.lettuce { z-index: 3; bottom: 23%; }
+  .taco-layer.pico { z-index: 4; bottom: 30%; }
+  .taco-layer.crema { z-index: 5; bottom: 37%; }
 
   @media (max-width: 860px) {
     nav.desktop-nav { display: none; }
@@ -1113,20 +1103,25 @@
       </ul>
     </div>
     <div class="taco-stage">
-      <svg class="taco-shell-svg" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg class="taco-shell-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <linearGradient id="shellGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#f7d787"/>
             <stop offset="100%" stop-color="#c9862f"/>
           </linearGradient>
         </defs>
-        <path d="M30,60 Q240,225 450,60 L450,102 Q240,265 30,102 Z" fill="url(#shellGrad)" stroke="#3d2410" stroke-width="6" stroke-linejoin="round"/>
-        <circle cx="120" cy="88" r="4" fill="#8a5a20" opacity="0.5"/>
-        <circle cx="200" cy="108" r="3" fill="#8a5a20" opacity="0.4"/>
-        <circle cx="300" cy="104" r="4" fill="#8a5a20" opacity="0.5"/>
-        <circle cx="365" cy="84" r="3" fill="#8a5a20" opacity="0.4"/>
-        <circle cx="160" cy="74" r="2.5" fill="#8a5a20" opacity="0.4"/>
-        <circle cx="330" cy="70" r="2.5" fill="#8a5a20" opacity="0.4"/>
+        <path d="M68,68 Q200,268 332,68 L332,104 Q200,304 68,104 Z" fill="url(#shellGrad)" stroke="#3d2410" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M78,98 Q108,140 100,175" fill="none" stroke="#a8791f" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+        <path d="M322,98 Q292,140 300,175" fill="none" stroke="#a8791f" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+        <polygon points="100,175 112,198 88,198" fill="#c9862f" stroke="#3d2410" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="140,225 152,248 128,248" fill="#c9862f" stroke="#3d2410" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="185,248 197,271 173,271" fill="#c9862f" stroke="#3d2410" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="230,248 242,271 218,271" fill="#c9862f" stroke="#3d2410" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="270,225 282,248 258,248" fill="#c9862f" stroke="#3d2410" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="300,175 312,198 288,198" fill="#c9862f" stroke="#3d2410" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="150" cy="110" r="4" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="250" cy="110" r="4" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="200" cy="90" r="3.5" fill="#8a5a20" opacity="0.4"/>
       </svg>
 
       <div class="taco-layer meat" data-layer="0">
@@ -1200,12 +1195,6 @@
         </svg>
       </div>
 
-      <svg class="taco-shell-front-svg" viewBox="0 0 480 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M20,10 Q240,95 460,10 L460,32 Q240,120 20,32 Z" fill="url(#shellGrad)" stroke="#3d2410" stroke-width="5" stroke-linejoin="round"/>
-        <circle cx="140" cy="20" r="3" fill="#8a5a20" opacity="0.5"/>
-        <circle cx="240" cy="26" r="3" fill="#8a5a20" opacity="0.5"/>
-        <circle cx="340" cy="20" r="3" fill="#8a5a20" opacity="0.5"/>
-      </svg>
     </div>
   </div>
 </section>
