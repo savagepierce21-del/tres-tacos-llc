@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0a0a">
 <title>Tres Tacos LLC | Drive-Thru Taco Truck | North Las Vegas, NV</title>
-<meta name="description" content="Tres Tacos LLC is a drive-thru taco truck at 6035 Losee Rd, North Las Vegas, NV serving fresh street tacos, burritos, quesabirria, catering and more.">
+<meta name="description" content="Tres Tacos LLC is a drive-thru taco truck at 6035 Losee Rd, North Las Vegas, NV serving fresh street tacos, burritos, quesabirria and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --masa: #fdf6e9;
-    --chili: #d84927;
-    --avocado: #4c7a3d;
-    --lime: #a3c93a;
-    --char: #2b1c17;
-    --agave: #f2b134;
-    --header-h: 76px;
+    --bg: #0b0a0a;
+    --bg-alt: #16130f;
+    --card: #1c1815;
+    --ink: #f4efe6;
+    --muted: #a49a8d;
+    --accent: #ff5630;
+    --gold: #f2b134;
+    --line: rgba(244,239,230,0.12);
+    --header-h: 84px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,94 +29,275 @@
     scroll-padding-top: var(--header-h);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
   body {
-    font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
-    background: var(--masa);
-    color: var(--char);
-    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2000;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   a { color: inherit; text-decoration: none; }
 
+  h1, h2, h3, .display {
+    font-family: 'Bebas Neue', 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 1.05;
+    font-weight: 400;
+  }
+
   section[id] { scroll-margin-top: var(--header-h); }
 
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* Scroll progress */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 1100;
+    width: 0%;
+  }
+
+  /* Header */
   header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: var(--char);
-    color: var(--masa);
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 5%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    min-height: var(--header-h);
+    padding: 0 5%;
+    height: var(--header-h);
+    background: rgba(11,10,10,0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  header.scrolled {
+    background: rgba(11,10,10,0.92);
+    border-bottom-color: var(--line);
   }
 
   .logo {
-    font-size: 1.6rem;
-    font-weight: bold;
-    letter-spacing: 1px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.7rem;
   }
 
-  .logo span { color: var(--agave); }
+  .logo .mark {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    transform: rotate(45deg);
+  }
 
-  nav ul {
+  .logo .mark span { transform: rotate(-45deg); }
+
+  .logo .word {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .logo .word small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  nav.desktop-nav ul {
     list-style: none;
     display: flex;
-    gap: 1.7rem;
-    flex-wrap: wrap;
+    gap: 2.2rem;
   }
 
-  nav a {
-    font-weight: bold;
+  nav.desktop-nav a {
+    font-size: 0.78rem;
+    font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    position: relative;
+    padding-bottom: 4px;
     transition: color 0.2s;
   }
 
-  nav a:hover { color: var(--agave); }
-
-  .hero {
-    background:
-      radial-gradient(circle at 20% 20%, rgba(216,73,39,0.25), transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(76,122,61,0.25), transparent 40%),
-      linear-gradient(135deg, var(--char) 0%, #4a2f22 100%);
-    color: var(--masa);
-    text-align: center;
-    padding: 6rem 5% 4rem;
+  nav.desktop-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.25s;
   }
 
-  .hero .tag {
+  nav.desktop-nav a:hover {
+    color: var(--ink);
+  }
+
+  nav.desktop-nav a:hover::after { width: 100%; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 2px;
+    background: var(--ink);
+    transition: transform 0.25s, opacity 0.25s;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(.7,0,.3,1);
+  }
+
+  .mobile-nav.open { transform: translateY(0); }
+
+  .mobile-nav a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    color: var(--ink);
+  }
+
+  .mobile-nav a:hover { color: var(--accent); }
+
+  /* Marquee */
+  .marquee {
+    background: var(--accent);
+    color: var(--bg);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.6rem 0;
+  }
+
+  .marquee-track {
     display: inline-block;
-    background: var(--chili);
-    color: var(--masa);
-    padding: 0.4rem 1rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    animation: marquee 22s linear infinite;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+  }
+
+  .marquee-track span {
+    margin: 0 1.2rem;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 5% 4rem;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,86,48,0.16), transparent 55%),
+      radial-gradient(ellipse at 75% 80%, rgba(242,177,52,0.10), transparent 55%),
+      var(--bg);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .hero .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1.5rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .hero .kicker::before,
+  .hero .kicker::after {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--gold);
   }
 
   .hero h1 {
-    font-size: clamp(2.2rem, 6vw, 4rem);
-    margin-bottom: 1rem;
+    font-size: clamp(3.2rem, 10vw, 7.5rem);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
   }
 
-  .hero h1 span { color: var(--agave); }
+  .hero h1 .line2 { color: var(--accent); }
 
   .hero p.sub {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    opacity: 0.9;
+    font-size: 1.15rem;
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    color: var(--muted);
   }
 
   .btn-row {
@@ -118,329 +305,401 @@
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
 
   .btn {
-    display: inline-block;
-    padding: 0.9rem 1.8rem;
-    border-radius: 8px;
-    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.1rem;
+    font-weight: 700;
     text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-    transition: transform 0.15s, box-shadow 0.15s;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
     cursor: pointer;
-    border: none;
+    border: 1px solid transparent;
+    transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
   }
 
   .btn-primary {
-    background: var(--chili);
-    color: var(--masa);
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    background: #ff6d4a;
   }
 
   .btn-secondary {
     background: transparent;
-    color: var(--masa);
-    border: 2px solid var(--masa);
+    color: var(--ink);
+    border-color: var(--line);
   }
 
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  .btn-secondary:hover {
+    border-color: var(--ink);
+    transform: translateY(-3px);
   }
 
   .trust-row {
     display: flex;
     justify-content: center;
-    gap: 2.2rem;
+    gap: 2.4rem;
     flex-wrap: wrap;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.85;
+    letter-spacing: 2px;
+    color: var(--muted);
   }
 
+  .trust-row span { position: relative; }
+  .trust-row span:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -1.2rem;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Sections */
   section {
-    padding: 4.5rem 5%;
-    max-width: 1100px;
+    padding: 6.5rem 5%;
+    max-width: 1180px;
     margin: 0 auto;
   }
 
   .section-title {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
 
   .section-title .eyebrow {
-    color: var(--chili);
-    font-weight: bold;
+    color: var(--accent);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.85rem;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
   }
 
   .section-title h2 {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    margin-top: 0.4rem;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    text-transform: uppercase;
+    margin-top: 0.6rem;
   }
 
   .section-title p.lede {
-    max-width: 560px;
-    margin: 0.8rem auto 0;
-    color: #6b5b4f;
+    max-width: 540px;
+    margin: 1rem auto 0;
+    color: var(--muted);
   }
 
   /* How it works */
   .steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
   }
 
   .step {
-    background: white;
-    border-radius: 14px;
-    padding: 2rem 1.5rem;
-    text-align: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-    position: relative;
+    background: var(--bg);
+    padding: 2.6rem 2rem;
+    text-align: left;
   }
 
   .step .num {
-    width: 42px;
-    height: 42px;
-    line-height: 42px;
-    border-radius: 50%;
-    background: var(--chili);
-    color: var(--masa);
-    font-weight: bold;
-    margin: 0 auto 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 1rem;
   }
 
-  .step h3 { margin-bottom: 0.5rem; font-size: 1.05rem; }
-  .step p { color: #555; font-size: 0.92rem; }
+  .step h3 {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 1px;
+  }
+
+  .step p { color: var(--muted); font-size: 0.92rem; }
 
   /* Menu */
-  .menu-category { margin-bottom: 3rem; }
+  .menu-category { margin-bottom: 4rem; }
   .menu-category:last-child { margin-bottom: 0; }
 
   .menu-category h3 {
-    color: var(--avocado);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 1rem;
-    border-bottom: 2px solid var(--agave);
-    padding-bottom: 0.6rem;
-    margin-bottom: 1.3rem;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .menu-category h3::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
   }
 
   .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--line);
   }
 
-  .menu-card {
-    background: white;
-    border-radius: 14px;
-    padding: 1.8rem;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-    border-top: 5px solid var(--chili);
-    transition: transform 0.2s;
-  }
-
-  .menu-card:nth-child(2n) { border-top-color: var(--avocado); }
-  .menu-card:nth-child(3n) { border-top-color: var(--agave); }
-
-  .menu-card:hover { transform: translateY(-4px); }
-
-  .menu-card .row {
+  .menu-item {
+    padding: 1.4rem 0.5rem;
+    border-bottom: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    gap: 0.5rem;
+    gap: 1rem;
+    transition: padding-left 0.25s, background 0.25s;
   }
 
-  .menu-card .price {
-    color: var(--chili);
-    font-weight: bold;
-    white-space: nowrap;
+  .menu-item:hover {
+    padding-left: 1rem;
+    background: rgba(255,86,48,0.05);
   }
 
-  .menu-card h3 {
-    font-size: 1.15rem;
+  .menu-item .info h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
   }
 
-  .menu-card .tags {
-    margin-top: 0.6rem;
+  .menu-item .info p {
+    color: var(--muted);
+    font-size: 0.86rem;
   }
 
-  .menu-card .tags span {
+  .menu-item .info .tag {
     display: inline-block;
-    background: var(--masa);
-    color: var(--avocado);
-    font-size: 0.68rem;
-    font-weight: bold;
+    font-size: 0.62rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 0.2rem 0.5rem;
-    border-radius: 999px;
-    margin-right: 0.3rem;
-    margin-top: 0.3rem;
+    letter-spacing: 1px;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.1rem 0.45rem;
+    margin-top: 0.5rem;
   }
 
-  .menu-card p {
-    color: #555;
-    font-size: 0.95rem;
-    margin-top: 0.4rem;
+  .menu-item .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--accent);
+    white-space: nowrap;
   }
 
   .menu-note {
     text-align: center;
-    margin-top: 2.5rem;
-    color: #777;
+    margin-top: 3rem;
+    color: var(--muted);
     font-style: italic;
+    font-size: 0.9rem;
   }
 
   /* About */
   .about {
-    background: var(--avocado);
-    color: var(--masa);
-    border-radius: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
-    padding: 3rem;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
     align-items: center;
   }
 
-  .about h2 { margin-bottom: 1rem; }
-  .about p { margin-bottom: 1rem; }
-  .about p:last-of-type { margin-bottom: 0; }
+  .about .eyebrow {
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .about h2 {
+    font-size: clamp(2.2rem, 4.5vw, 3rem);
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+  }
+
+  .about p { color: var(--muted); margin-bottom: 1rem; }
 
   .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    text-align: center;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .stats .stat {
+    background: var(--bg-alt);
+    padding: 1.8rem 2rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
   }
 
   .stats .num {
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: var(--agave);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem;
+    color: var(--gold);
   }
 
   .stats .label {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    opacity: 0.85;
+    letter-spacing: 1.5px;
+    color: var(--muted);
   }
 
-  /* Favorites strip */
+  /* Favorites */
   .favorites-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
   }
 
   .favorite-tile {
-    border-radius: 14px;
-    padding: 2rem 1rem;
+    background: var(--bg-alt);
+    padding: 2.8rem 1.5rem;
     text-align: center;
-    color: var(--masa);
-    font-weight: bold;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transition: background 0.25s, transform 0.25s;
   }
 
-  .favorite-tile .emoji { font-size: 2.4rem; display: block; margin-bottom: 0.6rem; }
-  .favorite-tile .fname { font-size: 0.95rem; }
+  .favorite-tile:hover {
+    background: var(--card);
+    transform: translateY(-4px);
+  }
 
-  .favorite-tile.f1 { background: linear-gradient(135deg, var(--chili), #a83217); }
-  .favorite-tile.f2 { background: linear-gradient(135deg, var(--avocado), #365c2b); }
-  .favorite-tile.f3 { background: linear-gradient(135deg, var(--agave), #c98d15); color: var(--char); }
-  .favorite-tile.f4 { background: linear-gradient(135deg, #8a5236, #5c341f); }
-  .favorite-tile.f5 { background: linear-gradient(135deg, var(--chili), var(--agave)); color: var(--char); }
-  .favorite-tile.f6 { background: linear-gradient(135deg, var(--avocado), var(--lime)); color: var(--char); }
+  .favorite-tile .rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  .favorite-tile .fname {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
   /* Reviews */
   .review-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
   }
 
   .review-card {
-    background: white;
-    border-radius: 14px;
-    padding: 1.8rem;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    border-top: 2px solid var(--accent);
+    padding-top: 1.5rem;
   }
 
   .review-card .stars {
-    color: var(--agave);
-    letter-spacing: 2px;
-    margin-bottom: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 1.2rem;
+    font-size: 0.9rem;
   }
 
   .review-card p.quote {
-    color: #444;
-    font-style: italic;
-    margin-bottom: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+    line-height: 1.35;
+    margin-bottom: 1.4rem;
+    text-transform: none;
   }
 
   .review-card .who {
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: var(--chili);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   .review-card .where {
-    font-size: 0.8rem;
-    color: #888;
+    font-size: 0.78rem;
+    color: var(--muted);
   }
 
   /* Catering */
   .catering {
-    background: var(--char);
-    color: var(--masa);
-    border-radius: 20px;
-    padding: 3rem;
+    background: var(--bg-alt);
+    padding: 4rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
+    gap: 3rem;
     align-items: center;
+    border: 1px solid var(--line);
   }
 
-  .catering h2 { margin-bottom: 1rem; }
-  .catering p { margin-bottom: 1rem; opacity: 0.9; }
-
-  .catering ul {
-    list-style: none;
+  .catering h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
   }
+
+  .catering p { color: var(--muted); margin-bottom: 1.6rem; }
+
+  .catering ul { list-style: none; }
 
   .catering ul li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.92rem;
+    color: var(--muted);
   }
 
   .catering ul li:last-child { border-bottom: none; }
-
-  .catering ul li strong { color: var(--agave); }
+  .catering ul li strong { color: var(--gold); display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.3rem; }
 
   /* FAQ */
   .faq-list details {
-    background: white;
-    border-radius: 12px;
-    padding: 1.1rem 1.5rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border-bottom: 1px solid var(--line);
+    padding: 1.4rem 0;
   }
+
+  .faq-list details:first-child { border-top: 1px solid var(--line); }
 
   .faq-list summary {
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1.05rem;
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -451,18 +710,20 @@
 
   .faq-list summary::after {
     content: "+";
-    color: var(--chili);
-    font-size: 1.3rem;
-    font-weight: bold;
+    color: var(--accent);
+    font-size: 1.5rem;
+    font-weight: 300;
     margin-left: 1rem;
+    transition: transform 0.25s;
   }
 
-  .faq-list details[open] summary::after { content: "\2212"; }
+  .faq-list details[open] summary::after { content: "+"; transform: rotate(45deg); }
 
   .faq-list details p {
-    margin-top: 0.8rem;
-    color: #555;
-    font-size: 0.95rem;
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.94rem;
+    max-width: 700px;
   }
 
   /* Location */
@@ -475,130 +736,165 @@
 
   .map-frame {
     width: 100%;
-    min-height: 320px;
-    border: 0;
-    border-radius: 14px;
+    min-height: 340px;
+    border: 1px solid var(--line);
+    filter: grayscale(1) invert(0.92) contrast(0.9);
+    transition: filter 0.3s;
   }
 
+  .map-frame:hover { filter: grayscale(0.4) invert(0.85) contrast(1); }
+
   .location-details {
-    background: white;
-    border-radius: 14px;
-    padding: 2rem;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    border: 1px solid var(--line);
+    padding: 2.5rem;
   }
 
   .location-details h3 {
-    color: var(--chili);
-    margin-bottom: 0.5rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
   }
 
   .location-details .addr {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
   }
 
   .hours-table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 1.4rem;
   }
 
   .hours-table td {
-    padding: 0.3rem 0;
-    border-bottom: 1px dashed #eee;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--muted);
   }
 
   .hours-table td:last-child {
     text-align: right;
-    font-weight: bold;
+    font-weight: 700;
+    color: var(--ink);
   }
+
+  .location-details p { margin-bottom: 0.5rem; font-size: 0.92rem; }
+  .location-details p strong { color: var(--gold); }
 
   .payment-icons {
     display: flex;
     gap: 0.6rem;
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     flex-wrap: wrap;
   }
 
   .payment-icons span {
-    background: var(--masa);
-    padding: 0.3rem 0.7rem;
-    border-radius: 6px;
-    font-size: 0.78rem;
-    font-weight: bold;
-    color: var(--avocado);
+    border: 1px solid var(--line);
+    padding: 0.35rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
   }
 
+  /* Footer */
   footer {
-    background: var(--char);
-    color: var(--masa);
+    border-top: 1px solid var(--line);
     text-align: center;
-    padding: 2.5rem 5%;
-    margin-top: 2rem;
+    padding: 3.5rem 5% 2.5rem;
   }
 
-  footer .logo { justify-content: center; margin-bottom: 0.8rem; }
+  footer .logo { justify-content: center; margin-bottom: 1.5rem; }
 
   footer .foot-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.8rem;
     justify-content: center;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
     flex-wrap: wrap;
-    font-size: 0.9rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
   }
+
+  footer .foot-links a:hover { color: var(--accent); }
 
   footer .socials {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
     justify-content: center;
-    margin: 1rem 0;
-    font-size: 1.3rem;
+    margin: 1.5rem 0;
   }
 
-  footer .socials a { transition: color 0.2s; }
-  footer .socials a:hover { color: var(--agave); }
+  footer .socials a {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  footer .socials a:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer .addr-line { color: var(--muted); font-size: 0.85rem; }
 
   footer .copy {
-    opacity: 0.6;
-    font-size: 0.8rem;
-    margin-top: 1rem;
+    color: #5c554c;
+    font-size: 0.75rem;
+    margin-top: 1.5rem;
   }
 
   .back-to-top {
     position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: var(--chili);
-    color: var(--masa);
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    background: var(--ink);
+    color: var(--bg);
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    font-size: 1.2rem;
     z-index: 90;
-    transition: transform 0.15s;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
   }
 
-  .back-to-top:hover { transform: translateY(-3px); }
+  .back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover { background: var(--accent); color: var(--bg); }
 
-  @media (max-width: 700px) {
+  @media (max-width: 860px) {
+    nav.desktop-nav { display: none; }
+    .hamburger { display: flex; }
     .location-wrap { grid-template-columns: 1fr; }
-    nav ul { gap: 1rem; }
-    .logo { font-size: 1.2rem; }
-    :root { --header-h: 116px; }
-    header { flex-direction: column; gap: 0.6rem; padding: 0.8rem 5%; }
+    .about { grid-template-columns: 1fr; }
+    .catering { padding: 2.5rem 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">🌮 Tres <span>Tacos</span> LLC</div>
-  <nav>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header id="siteHeader">
+  <div class="logo">
+    <div class="mark"><span>TT</span></div>
+    <div class="word">TRES TACOS<small>LLC &middot; DRIVE-THRU</small></div>
+  </div>
+  <nav class="desktop-nav">
     <ul>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#about">About</a></li>
@@ -609,12 +905,46 @@
       <li><a href="#location">Location</a></li>
     </ul>
   </nav>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
+<div class="mobile-nav" id="mobileNav">
+  <a href="#menu">Menu</a>
+  <a href="#about">About</a>
+  <a href="#favorites">Favorites</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#catering">Catering</a>
+  <a href="#faq">FAQ</a>
+  <a href="#location">Location</a>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>DRIVE-THRU ONLY</span>
+    <span>&middot;</span>
+    <span>FRESH DAILY</span>
+    <span>&middot;</span>
+    <span>MADE TO ORDER</span>
+    <span>&middot;</span>
+    <span>NORTH LAS VEGAS, NV</span>
+    <span>&middot;</span>
+    <span>DRIVE-THRU ONLY</span>
+    <span>&middot;</span>
+    <span>FRESH DAILY</span>
+    <span>&middot;</span>
+    <span>MADE TO ORDER</span>
+    <span>&middot;</span>
+    <span>NORTH LAS VEGAS, NV</span>
+    <span>&middot;</span>
+  </div>
+</div>
+
 <section class="hero">
-  <div class="tag">Drive-Thru Taco Truck &middot; Est. 2019</div>
-  <h1>Real street tacos.<br>Zero <span>drama</span>. Stay in your car.</h1>
-  <p class="sub">Tres Tacos LLC serves up fresh, made-to-order tacos, burritos, quesabirria and more straight through our drive-thru window in North Las Vegas — no parking, no waiting in line.</p>
+  <div class="kicker">Est. 2019 &middot; North Las Vegas</div>
+  <h1>Real Street Tacos<br><span class="line2">Zero Drama.</span></h1>
+  <p class="sub">Fresh, made-to-order tacos, burritos and quesabirria — straight through the drive-thru window. No parking, no line, no compromise.</p>
   <div class="btn-row">
     <a href="#menu" class="btn btn-primary">View Menu</a>
     <a href="#location" class="btn btn-secondary">Get Directions</a>
@@ -627,32 +957,32 @@
   </div>
 </section>
 
-<section id="how">
+<section id="how" class="reveal">
   <div class="section-title">
     <div class="eyebrow">Simple As That</div>
-    <h2>How The Drive-Thru Works</h2>
-    <p class="lede">No app, no ordering kiosk, no getting out of the car. Just pull up.</p>
+    <h2>How It Works</h2>
+    <p class="lede">No app, no kiosk, no getting out of the car.</p>
   </div>
   <div class="steps">
     <div class="step">
-      <div class="num">1</div>
+      <div class="num">01</div>
       <h3>Pull Up</h3>
-      <p>Line up at 6035 Losee Rd — our menu board is visible from the lane so you can browse before you reach the window.</p>
+      <p>Line up at 6035 Losee Rd — the menu board is visible from the lane so you can browse before you reach the window.</p>
     </div>
     <div class="step">
-      <div class="num">2</div>
+      <div class="num">02</div>
       <h3>Order &amp; Pay</h3>
-      <p>Tell us your order at the window. We take cash, credit, debit, and tap-to-pay.</p>
+      <p>Tell us your order at the window. We take cash, credit, debit and tap-to-pay.</p>
     </div>
     <div class="step">
-      <div class="num">3</div>
-      <h3>Fresh In ~5 Minutes</h3>
-      <p>Everything is cooked to order, so pull forward and we'll have your food hot and ready in about five minutes.</p>
+      <div class="num">03</div>
+      <h3>Eat In ~5 Min</h3>
+      <p>Everything is cooked to order — pull forward and we'll have it hot and ready fast.</p>
     </div>
   </div>
 </section>
 
-<section id="menu">
+<section id="menu" class="reveal">
   <div class="section-title">
     <div class="eyebrow">Fresh Off The Grill</div>
     <h2>Our Menu</h2>
@@ -662,31 +992,48 @@
   <div class="menu-category">
     <h3>Tacos</h3>
     <div class="menu-grid">
-      <div class="menu-card">
-        <div class="row"><h3>Carne Asada</h3><span class="price">$2.75</span></div>
-        <p>Grilled steak on double corn tortillas with onion, cilantro &amp; salsa verde.</p>
-        <div class="tags"><span>Gluten-Free Tortilla Option</span></div>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Carne Asada</h4>
+          <p>Grilled steak, onion, cilantro &amp; salsa verde on double corn tortillas.</p>
+        </div>
+        <div class="price">$2.75</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Al Pastor</h3><span class="price">$2.75</span></div>
-        <p>Marinated pork shaved off the trompo with pineapple, onion &amp; cilantro.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Al Pastor</h4>
+          <p>Marinated pork off the trompo with pineapple, onion &amp; cilantro.</p>
+        </div>
+        <div class="price">$2.75</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Pollo Asado</h3><span class="price">$2.75</span></div>
-        <p>Citrus-grilled chicken thigh with onion, cilantro &amp; salsa roja.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Pollo Asado</h4>
+          <p>Citrus-grilled chicken thigh with onion, cilantro &amp; salsa roja.</p>
+        </div>
+        <div class="price">$2.75</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Carnitas</h3><span class="price">$2.75</span></div>
-        <p>Slow-braised pork, crisped on the flat-top, topped with salsa verde.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Carnitas</h4>
+          <p>Slow-braised pork, crisped on the flat-top, salsa verde.</p>
+        </div>
+        <div class="price">$2.75</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Lengua</h3><span class="price">$3.25</span></div>
-        <p>Beef tongue, simmered tender and griddle-finished. A house specialty.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Lengua</h4>
+          <p>Beef tongue, simmered tender, griddle-finished. House specialty.</p>
+        </div>
+        <div class="price">$3.25</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Nopales (Veggie)</h3><span class="price">$2.50</span></div>
-        <p>Grilled cactus with onion, cilantro, cotija &amp; salsa verde.</p>
-        <div class="tags"><span>Vegetarian</span></div>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Nopales</h4>
+          <p>Grilled cactus, onion, cilantro, cotija &amp; salsa verde.</p>
+          <span class="tag">Vegetarian</span>
+        </div>
+        <div class="price">$2.50</div>
       </div>
     </div>
   </div>
@@ -694,30 +1041,48 @@
   <div class="menu-category">
     <h3>Specialties</h3>
     <div class="menu-grid">
-      <div class="menu-card">
-        <div class="row"><h3>Burrito Especial</h3><span class="price">$10.99</span></div>
-        <p>Rice, beans, cheese, your choice of meat, guac &amp; crema wrapped in a warm flour tortilla.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Burrito Especial</h4>
+          <p>Rice, beans, cheese, choice of meat, guac &amp; crema.</p>
+        </div>
+        <div class="price">$10.99</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Quesabirria (3pc)</h3><span class="price">$9.50</span></div>
-        <p>Crispy cheese-griddled tortillas stuffed with slow-braised birria, served with consommé for dipping.</p>
-        <div class="tags"><span>Fan Favorite</span></div>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Quesabirria (3pc)</h4>
+          <p>Cheese-griddled tortillas stuffed with birria, consommé for dipping.</p>
+          <span class="tag">Fan Favorite</span>
+        </div>
+        <div class="price">$9.50</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Torta</h3><span class="price">$8.75</span></div>
-        <p>Toasted telera roll with beans, cheese, avocado, lettuce, tomato &amp; your choice of meat.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Torta</h4>
+          <p>Toasted telera, beans, cheese, avocado, lettuce, tomato, choice of meat.</p>
+        </div>
+        <div class="price">$8.75</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Mulitas (2pc)</h3><span class="price">$7.50</span></div>
-        <p>Griddled corn tortilla "sandwiches" with melted cheese and your choice of meat.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Mulitas (2pc)</h4>
+          <p>Griddled corn tortilla "sandwiches" with melted cheese.</p>
+        </div>
+        <div class="price">$7.50</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Loaded Nachos</h3><span class="price">$8.25</span></div>
-        <p>House-fried chips piled with queso, beans, pico, jalapeño &amp; your choice of meat.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Loaded Nachos</h4>
+          <p>House-fried chips, queso, beans, pico, jalapeño, choice of meat.</p>
+        </div>
+        <div class="price">$8.25</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Taco Plate (3pc)</h3><span class="price">$11.50</span></div>
-        <p>Three tacos of your choice with rice, beans &amp; a side of chips.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Taco Plate (3pc)</h4>
+          <p>Three tacos of your choice with rice, beans &amp; chips.</p>
+        </div>
+        <div class="price">$11.50</div>
       </div>
     </div>
   </div>
@@ -725,17 +1090,26 @@
   <div class="menu-category">
     <h3>Sides &amp; Snacks</h3>
     <div class="menu-grid">
-      <div class="menu-card">
-        <div class="row"><h3>Elote Cup</h3><span class="price">$4.75</span></div>
-        <p>Grilled corn, mayo, cotija, chili powder &amp; lime — the classic Mexican street snack.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Elote Cup</h4>
+          <p>Grilled corn, mayo, cotija, chili powder &amp; lime.</p>
+        </div>
+        <div class="price">$4.75</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Chips &amp; Guac</h3><span class="price">$5.50</span></div>
-        <p>Fresh-fried chips with hand-mashed guacamole.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Chips &amp; Guac</h4>
+          <p>Fresh-fried chips, hand-mashed guacamole.</p>
+        </div>
+        <div class="price">$5.50</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Rice &amp; Beans</h3><span class="price">$3.75</span></div>
-        <p>A side of Mexican rice and refried or whole pinto beans.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Rice &amp; Beans</h4>
+          <p>Mexican rice with pinto beans, whole or refried.</p>
+        </div>
+        <div class="price">$3.75</div>
       </div>
     </div>
   </div>
@@ -743,21 +1117,33 @@
   <div class="menu-category">
     <h3>Drinks &amp; Dessert</h3>
     <div class="menu-grid">
-      <div class="menu-card">
-        <div class="row"><h3>Horchata / Jamaica</h3><span class="price">$3.00</span></div>
-        <p>Ice-cold house-made agua fresca, made fresh daily.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Horchata / Jamaica</h4>
+          <p>Ice-cold house-made agua fresca, made fresh daily.</p>
+        </div>
+        <div class="price">$3.00</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Mexican Coke</h3><span class="price">$2.50</span></div>
-        <p>Glass-bottle Coca-Cola made with real cane sugar.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Mexican Coke</h4>
+          <p>Glass-bottle Coca-Cola with real cane sugar.</p>
+        </div>
+        <div class="price">$2.50</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Churros (3pc)</h3><span class="price">$4.50</span></div>
-        <p>Cinnamon-sugar dusted, served warm with chocolate or caramel dip.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Churros (3pc)</h4>
+          <p>Cinnamon-sugar dusted, served warm with dip.</p>
+        </div>
+        <div class="price">$4.50</div>
       </div>
-      <div class="menu-card">
-        <div class="row"><h3>Flan</h3><span class="price">$4.00</span></div>
-        <p>Classic house-made caramel custard.</p>
+      <div class="menu-item">
+        <div class="info">
+          <h4>Flan</h4>
+          <p>Classic house-made caramel custard.</p>
+        </div>
+        <div class="price">$4.00</div>
       </div>
     </div>
   </div>
@@ -765,46 +1151,38 @@
   <p class="menu-note">Ask about our rotating seasonal specials board — new items drop most Fridays.</p>
 </section>
 
-<section id="about">
+<section id="about" class="reveal">
   <div class="about">
     <div>
+      <span class="eyebrow">Our Story</span>
       <h2>Family Recipes, Built From Scratch</h2>
       <p>Tres Tacos LLC started in 2019 with one truck, one griddle, and three generations of recipes brought over from Jalisco. What began as weekend pop-ups at local car shows grew into a full-time drive-thru operation once regulars started lining up before we even opened the window.</p>
-      <p>Every salsa is made in-house daily, every tortilla is pressed fresh, and every order comes through our drive-thru window fast — without cutting corners on flavor. We're still run day-to-day by the same family that started it, and we still taste-test every new item on the menu before it goes up on the board.</p>
+      <p>Every salsa is made in-house daily, every tortilla is pressed fresh, and every order comes through the window fast — without cutting corners on flavor. We're still run day-to-day by the same family that started it.</p>
     </div>
     <div class="stats">
-      <div>
-        <div class="num">100%</div>
-        <div class="label">Made Fresh Daily</div>
-      </div>
-      <div>
-        <div class="num">2019</div>
-        <div class="label">Family Owned Since</div>
-      </div>
-      <div>
-        <div class="num">3</div>
-        <div class="label">Generations of Recipes</div>
-      </div>
+      <div class="stat"><span class="num">100%</span><span class="label">Made Fresh Daily</span></div>
+      <div class="stat"><span class="num">2019</span><span class="label">Family Owned Since</span></div>
+      <div class="stat"><span class="num">3</span><span class="label">Generations Of Recipes</span></div>
     </div>
   </div>
 </section>
 
-<section id="favorites">
+<section id="favorites" class="reveal">
   <div class="section-title">
     <div class="eyebrow">Crowd Pleasers</div>
     <h2>What People Order Most</h2>
   </div>
   <div class="favorites-grid">
-    <div class="favorite-tile f1"><span class="emoji">🌮</span><span class="fname">Carne Asada Tacos</span></div>
-    <div class="favorite-tile f2"><span class="emoji">🧀</span><span class="fname">Quesabirria</span></div>
-    <div class="favorite-tile f3"><span class="emoji">🌽</span><span class="fname">Elote Cup</span></div>
-    <div class="favorite-tile f4"><span class="emoji">🌯</span><span class="fname">Burrito Especial</span></div>
-    <div class="favorite-tile f5"><span class="emoji">🥤</span><span class="fname">Horchata</span></div>
-    <div class="favorite-tile f6"><span class="emoji">🍩</span><span class="fname">Churros</span></div>
+    <div class="favorite-tile"><span class="rank">01</span><span class="fname">Carne Asada Tacos</span></div>
+    <div class="favorite-tile"><span class="rank">02</span><span class="fname">Quesabirria</span></div>
+    <div class="favorite-tile"><span class="rank">03</span><span class="fname">Elote Cup</span></div>
+    <div class="favorite-tile"><span class="rank">04</span><span class="fname">Burrito Especial</span></div>
+    <div class="favorite-tile"><span class="rank">05</span><span class="fname">Horchata</span></div>
+    <div class="favorite-tile"><span class="rank">06</span><span class="fname">Churros</span></div>
   </div>
 </section>
 
-<section id="reviews">
+<section id="reviews" class="reveal">
   <div class="section-title">
     <div class="eyebrow">Word On The Street</div>
     <h2>What Customers Say</h2>
@@ -818,39 +1196,39 @@
     </div>
     <div class="review-card">
       <div class="stars">★★★★★</div>
-      <p class="quote">"Drive-thru line moves fast and the asada tacos taste like they came from someone's backyard, in the best way."</p>
+      <p class="quote">"Line moves fast and the asada tacos taste like they came from someone's backyard, in the best way."</p>
       <div class="who">Selena R.</div>
       <div class="where">Las Vegas, NV</div>
     </div>
     <div class="review-card">
       <div class="stars">★★★★★</div>
-      <p class="quote">"They catered my daughter's quinceañera and everyone asked where the tacos were from. Booking them again."</p>
+      <p class="quote">"They catered my daughter's quinceañera and everyone asked where the tacos were from."</p>
       <div class="who">Antonio V.</div>
       <div class="where">North Las Vegas, NV</div>
     </div>
   </div>
 </section>
 
-<section id="catering">
+<section id="catering" class="reveal">
   <div class="catering">
     <div>
-      <h2>Bring The Truck To Your Next Event</h2>
+      <h2>Bring The Truck To Your Event</h2>
       <p>From backyard birthdays to office parties and quinceañeras, Tres Tacos LLC caters events across the Las Vegas valley. We handle the grill, you handle the guest list.</p>
-      <a href="tel:+17025558226" class="btn btn-primary">Call to Book: (702) 555-8226</a>
+      <a href="tel:+17025558226" class="btn btn-primary">Call to Book &middot; (702) 555-8226</a>
     </div>
     <ul>
-      <li><strong>Minimum order:</strong> 25 guests</li>
-      <li><strong>Lead time:</strong> 5 days notice recommended</li>
-      <li><strong>Includes:</strong> Taco bar, sides, salsas &amp; disposable plates/utensils</li>
-      <li><strong>Service area:</strong> Las Vegas &amp; North Las Vegas valley</li>
+      <li><strong>Minimum Order</strong>25 guests</li>
+      <li><strong>Lead Time</strong>5 days notice recommended</li>
+      <li><strong>Includes</strong>Taco bar, sides, salsas &amp; disposables</li>
+      <li><strong>Service Area</strong>Las Vegas &amp; North Las Vegas valley</li>
     </ul>
   </div>
 </section>
 
-<section id="faq">
+<section id="faq" class="reveal">
   <div class="section-title">
     <div class="eyebrow">Good To Know</div>
-    <h2>Frequently Asked Questions</h2>
+    <h2>FAQ</h2>
   </div>
   <div class="faq-list">
     <details open>
@@ -863,7 +1241,7 @@
     </details>
     <details>
       <summary>Do you have vegetarian options?</summary>
-      <p>Yes. Our grilled nopales (cactus) tacos are vegetarian, and rice, beans, chips &amp; guac, elote, and most sides are meat-free. Let us know at the window if you have dietary restrictions.</p>
+      <p>Yes. Our grilled nopales (cactus) tacos are vegetarian, and rice, beans, chips &amp; guac, elote, and most sides are meat-free.</p>
     </details>
     <details>
       <summary>How long is the wait?</summary>
@@ -876,7 +1254,7 @@
   </div>
 </section>
 
-<section id="location">
+<section id="location" class="reveal">
   <div class="section-title">
     <div class="eyebrow">Find Us</div>
     <h2>Location &amp; Hours</h2>
@@ -893,7 +1271,6 @@
         <tr><td>Friday &ndash; Saturday</td><td>10:00 AM &ndash; 11:00 PM</td></tr>
         <tr><td>Sunday</td><td>11:00 AM &ndash; 8:00 PM</td></tr>
       </table>
-      <br>
       <p><strong>Phone:</strong> <a href="tel:+17025558226">(702) 555-8226</a></p>
       <p><strong>Email:</strong> <a href="mailto:hello@trestacosllc.com">hello@trestacosllc.com</a></p>
       <div class="payment-icons">
@@ -907,7 +1284,10 @@
 </section>
 
 <footer>
-  <div class="logo">🌮 Tres <span>Tacos</span> LLC</div>
+  <div class="logo">
+    <div class="mark"><span>TT</span></div>
+    <div class="word">TRES TACOS<small>LLC &middot; DRIVE-THRU</small></div>
+  </div>
   <div class="foot-links">
     <a href="#menu">Menu</a>
     <a href="#about">About</a>
@@ -918,15 +1298,68 @@
     <a href="#location">Location</a>
   </div>
   <div class="socials">
-    <a href="#" aria-label="Instagram">📷</a>
-    <a href="#" aria-label="Facebook">📘</a>
-    <a href="#" aria-label="TikTok">🎵</a>
+    <a href="#" aria-label="Instagram">IG</a>
+    <a href="#" aria-label="Facebook">FB</a>
+    <a href="#" aria-label="TikTok">TT</a>
   </div>
-  <p>6035 Losee Rd, North Las Vegas, NV 89081 &middot; (702) 555-8226</p>
+  <p class="addr-line">6035 Losee Rd, North Las Vegas, NV 89081 &middot; (702) 555-8226</p>
   <p class="copy">&copy; 2026 Tres Tacos LLC. All rights reserved.</p>
 </footer>
 
-<a href="#top" class="back-to-top" aria-label="Back to top">↑</a>
+<a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+
+<script>
+(function () {
+  var header = document.getElementById('siteHeader');
+  var progress = document.getElementById('scrollProgress');
+  var backToTop = document.getElementById('backToTop');
+
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y > 30);
+    backToTop.classList.toggle('show', y > 500);
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', function () {
+    var open = mobileNav.classList.toggle('open');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMobileNav);
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      closeMobileNav();
+    });
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+})();
+</script>
 
 </body>
 </html>
