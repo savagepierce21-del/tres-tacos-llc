@@ -876,12 +876,137 @@
   .back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .back-to-top:hover { background: var(--accent); color: var(--bg); }
 
+  /* Assembly (scroll-scrubbed taco build) */
+  .assembly-pin {
+    position: relative;
+    height: 420vh;
+  }
+
+  .assembly-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 5%;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(255,86,48,0.10), transparent 55%),
+      var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .assembly-copy .eyebrow {
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .assembly-copy h2 {
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+  }
+
+  .assembly-steps {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .assembly-steps li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .assembly-steps li .n {
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+  }
+
+  .assembly-steps li.active {
+    color: var(--ink);
+  }
+
+  .assembly-steps li.active .n {
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .taco-stage {
+    position: relative;
+    height: 70vh;
+    max-height: 560px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .taco-shell-svg {
+    position: absolute;
+    width: 100%;
+    max-width: 480px;
+    left: 50%;
+    bottom: 6%;
+    transform: translateX(-50%);
+    z-index: 0;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.45));
+  }
+
+  .taco-layer {
+    position: absolute;
+    left: 50%;
+    bottom: 12%;
+    width: 100%;
+    max-width: 440px;
+    transform: translate(-50%, -160px);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .taco-layer svg { display: block; width: 100%; height: auto; }
+
+  .taco-layer.meat { z-index: 1; bottom: 13%; }
+  .taco-layer.cheese { z-index: 2; bottom: 17%; }
+  .taco-layer.lettuce { z-index: 3; bottom: 21%; }
+  .taco-layer.toppings { z-index: 4; bottom: 25%; }
+
   @media (max-width: 860px) {
     nav.desktop-nav { display: none; }
     .hamburger { display: flex; }
     .location-wrap { grid-template-columns: 1fr; }
     .about { grid-template-columns: 1fr; }
     .catering { padding: 2.5rem 1.5rem; }
+    .assembly-sticky { grid-template-columns: 1fr; padding-top: 2rem; }
+    .assembly-steps { display: none; }
+    .taco-stage { height: 46vh; }
   }
 </style>
 </head>
@@ -954,6 +1079,98 @@
     <span>Fresh Daily</span>
     <span>Cash &amp; Card</span>
     <span>Open 7 Days</span>
+  </div>
+</section>
+
+<section class="assembly-pin" id="assembly-pin">
+  <div class="assembly-sticky">
+    <div class="assembly-copy">
+      <span class="eyebrow">Built Right In Front Of You</span>
+      <h2>Watch It Stack Up</h2>
+      <ul class="assembly-steps">
+        <li data-step="0"><span class="n">1</span> Seasoned Meat</li>
+        <li data-step="1"><span class="n">2</span> Melted Cheese</li>
+        <li data-step="2"><span class="n">3</span> Fresh Lettuce</li>
+        <li data-step="3"><span class="n">4</span> The Works</li>
+      </ul>
+    </div>
+    <div class="taco-stage">
+      <svg class="taco-shell-svg" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="shellGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f2c96a"/>
+            <stop offset="100%" stop-color="#c9862f"/>
+          </linearGradient>
+        </defs>
+        <path d="M30,60 Q240,225 450,60 L450,102 Q240,265 30,102 Z" fill="url(#shellGrad)"/>
+        <circle cx="120" cy="88" r="4" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="200" cy="108" r="3" fill="#8a5a20" opacity="0.4"/>
+        <circle cx="300" cy="104" r="4" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="365" cy="84" r="3" fill="#8a5a20" opacity="0.4"/>
+        <circle cx="160" cy="74" r="2.5" fill="#8a5a20" opacity="0.4"/>
+        <circle cx="330" cy="70" r="2.5" fill="#8a5a20" opacity="0.4"/>
+      </svg>
+
+      <div class="taco-layer meat" data-layer="0">
+        <svg viewBox="0 0 440 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="70" cy="55" rx="34" ry="19" fill="#7a3b20" transform="rotate(-8 70 55)"/>
+          <ellipse cx="130" cy="35" rx="30" ry="17" fill="#8a4526" transform="rotate(10 130 35)"/>
+          <ellipse cx="190" cy="60" rx="36" ry="20" fill="#6b3018" transform="rotate(-4 190 60)"/>
+          <ellipse cx="250" cy="32" rx="32" ry="18" fill="#93502c" transform="rotate(6 250 32)"/>
+          <ellipse cx="310" cy="58" rx="34" ry="19" fill="#7a3b20" transform="rotate(-10 310 58)"/>
+          <ellipse cx="370" cy="38" rx="30" ry="17" fill="#8a4526" transform="rotate(8 370 38)"/>
+          <ellipse cx="410" cy="62" rx="24" ry="15" fill="#6b3018" transform="rotate(-6 410 62)"/>
+          <circle cx="100" cy="45" r="2.4" fill="#2b1508"/>
+          <circle cx="220" cy="50" r="2.4" fill="#2b1508"/>
+          <circle cx="280" cy="42" r="2" fill="#2b1508"/>
+          <circle cx="340" cy="48" r="2.4" fill="#2b1508"/>
+          <circle cx="150" cy="60" r="2" fill="#2b1508"/>
+        </svg>
+      </div>
+
+      <div class="taco-layer cheese" data-layer="1">
+        <svg viewBox="0 0 440 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="40" y="30" width="70" height="7" rx="3.5" fill="#f2c94c" transform="rotate(-18 40 30)"/>
+          <rect x="90" y="14" width="60" height="7" rx="3.5" fill="#ffdb70" transform="rotate(14 90 14)"/>
+          <rect x="150" y="38" width="66" height="7" rx="3.5" fill="#f2c94c" transform="rotate(-10 150 38)"/>
+          <rect x="205" y="18" width="70" height="7" rx="3.5" fill="#ffdb70" transform="rotate(20 205 18)"/>
+          <rect x="265" y="34" width="60" height="7" rx="3.5" fill="#f2c94c" transform="rotate(-16 265 34)"/>
+          <rect x="315" y="12" width="64" height="7" rx="3.5" fill="#ffdb70" transform="rotate(10 315 12)"/>
+          <rect x="355" y="36" width="58" height="7" rx="3.5" fill="#f2c94c" transform="rotate(-14 355 36)"/>
+        </svg>
+      </div>
+
+      <div class="taco-layer lettuce" data-layer="2">
+        <svg viewBox="0 0 440 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="30,50 45,15 58,50 50,45 40,55" fill="#557a2f"/>
+          <polygon points="80,55 95,10 112,55 100,48 88,58" fill="#6f8f3e"/>
+          <polygon points="140,48 152,18 168,50 158,44 146,54" fill="#86a352"/>
+          <polygon points="195,55 210,12 228,55 216,46 202,58" fill="#557a2f"/>
+          <polygon points="250,48 264,16 280,50 270,44 258,54" fill="#6f8f3e"/>
+          <polygon points="305,55 320,14 337,55 326,46 312,58" fill="#86a352"/>
+          <polygon points="360,48 373,20 388,50 378,44 366,54" fill="#557a2f"/>
+          <polygon points="400,52 412,22 425,52 416,46 405,56" fill="#6f8f3e"/>
+        </svg>
+      </div>
+
+      <div class="taco-layer toppings" data-layer="3">
+        <svg viewBox="0 0 440 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M20,40 Q60,10 100,38 T180,36 T260,38 T340,34 T420,40" fill="none" stroke="#f4efe6" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+          <rect x="55" y="20" width="9" height="9" fill="#d1453b" transform="rotate(20 55 20)"/>
+          <rect x="130" y="12" width="8" height="8" fill="#d1453b" transform="rotate(-15 130 12)"/>
+          <rect x="220" y="18" width="9" height="9" fill="#d1453b" transform="rotate(12 220 18)"/>
+          <rect x="300" y="10" width="8" height="8" fill="#d1453b" transform="rotate(-20 300 10)"/>
+          <rect x="370" y="16" width="9" height="9" fill="#d1453b" transform="rotate(18 370 16)"/>
+          <circle cx="90" cy="15" r="2.6" fill="#3f6b2a"/>
+          <circle cx="165" cy="22" r="2.6" fill="#3f6b2a"/>
+          <circle cx="250" cy="14" r="2.6" fill="#3f6b2a"/>
+          <circle cx="330" cy="20" r="2.6" fill="#3f6b2a"/>
+          <circle cx="400" cy="12" r="2.6" fill="#3f6b2a"/>
+          <rect x="110" y="30" width="10" height="3" rx="1.5" fill="#f4efe6" opacity="0.7" transform="rotate(-25 110 30)"/>
+          <rect x="270" y="28" width="10" height="3" rx="1.5" fill="#f4efe6" opacity="0.7" transform="rotate(20 270 28)"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1321,8 +1538,39 @@
     var docH = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + '%';
   }
-  document.addEventListener('scroll', onScroll, { passive: true });
+  var assembly = document.getElementById('assembly-pin');
+  var tacoLayers = assembly ? assembly.querySelectorAll('.taco-layer') : [];
+  var assemblySteps = assembly ? assembly.querySelectorAll('.assembly-steps li') : [];
+
+  function updateAssembly() {
+    if (!assembly) return;
+    var rect = assembly.getBoundingClientRect();
+    var scrollableDist = assembly.offsetHeight - window.innerHeight;
+    var progress = scrollableDist > 0 ? -rect.top / scrollableDist : 0;
+    progress = Math.min(Math.max(progress, 0), 1);
+
+    var stageCount = tacoLayers.length;
+    var activeIndex = Math.min(Math.floor(progress * stageCount), stageCount - 1);
+
+    tacoLayers.forEach(function (layer, i) {
+      var stageStart = i / stageCount;
+      var stageEnd = (i + 1) / stageCount;
+      var local = (progress - stageStart) / (stageEnd - stageStart);
+      local = Math.min(Math.max(local, 0), 1);
+      var eased = 1 - Math.pow(1 - local, 3);
+      layer.style.transform = 'translate(-50%, ' + (-160 * (1 - eased)) + 'px)';
+      layer.style.opacity = eased;
+    });
+
+    assemblySteps.forEach(function (step, i) {
+      step.classList.toggle('active', i === activeIndex && progress > 0);
+    });
+  }
+
+  document.addEventListener('scroll', function () { onScroll(); updateAssembly(); }, { passive: true });
+  window.addEventListener('resize', updateAssembly);
   onScroll();
+  updateAssembly();
 
   var hamburger = document.getElementById('hamburgerBtn');
   var mobileNav = document.getElementById('mobileNav');
