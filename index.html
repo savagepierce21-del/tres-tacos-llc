@@ -964,33 +964,54 @@
     border-color: var(--accent);
   }
 
-  .quesadilla-stage {
+  .taco-stage {
     position: relative;
     height: 70vh;
-    max-height: 520px;
+    max-height: 560px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
   }
 
-  .quesadilla-layer {
+  .taco-shell-svg {
     position: absolute;
+    width: 100%;
+    max-width: 480px;
     left: 50%;
-    top: 50%;
+    bottom: 6%;
+    transform: translateX(-50%);
+    z-index: 0;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.45));
+  }
+
+  .taco-shell-front-svg {
+    position: absolute;
     width: 100%;
     max-width: 460px;
-    transform: translate(-50%, calc(-50% - 220px));
+    left: 50%;
+    bottom: 9%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .taco-layer {
+    position: absolute;
+    left: 50%;
+    bottom: 12%;
+    width: 100%;
+    max-width: 430px;
+    transform: translate(-50%, -160px);
     opacity: 0;
     will-change: transform, opacity;
   }
 
-  .quesadilla-layer svg { display: block; width: 100%; height: auto; }
+  .taco-layer svg { display: block; width: 100%; height: auto; }
 
-  .quesadilla-layer.tortilla-bottom { z-index: 1; filter: drop-shadow(0 16px 26px rgba(0,0,0,0.45)); }
-  .quesadilla-layer.cheese { z-index: 2; }
-  .quesadilla-layer.meat { z-index: 3; }
-  .quesadilla-layer.toppings { z-index: 4; }
-  .quesadilla-layer.tortilla-top { z-index: 5; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35)); }
+  .taco-layer.meat { z-index: 1; bottom: 10%; }
+  .taco-layer.cheese { z-index: 2; bottom: 14%; }
+  .taco-layer.lettuce { z-index: 3; bottom: 18%; }
+  .taco-layer.pico { z-index: 4; bottom: 24%; }
+  .taco-layer.crema { z-index: 5; bottom: 30%; }
 
   @media (max-width: 860px) {
     nav.desktop-nav { display: none; }
@@ -1000,7 +1021,7 @@
     .catering { padding: 2.5rem 1.5rem; }
     .assembly-sticky { grid-template-columns: 1fr; padding-top: 2rem; }
     .assembly-steps { display: none; }
-    .quesadilla-stage { height: 46vh; }
+    .taco-stage { height: 46vh; }
   }
 </style>
 </head>
@@ -1082,161 +1103,107 @@
       <span class="eyebrow">Built Right In Front Of You</span>
       <h2>Watch It Stack Up</h2>
       <ul class="assembly-steps">
-        <li data-step="0"><span class="n">1</span> Bottom Tortilla</li>
+        <li data-step="0"><span class="n">1</span> Seasoned Meat</li>
         <li data-step="1"><span class="n">2</span> Melted Cheese</li>
-        <li data-step="2"><span class="n">3</span> Seasoned Meat</li>
-        <li data-step="3"><span class="n">4</span> Fresh Toppings</li>
-        <li data-step="4"><span class="n">5</span> Top Tortilla</li>
+        <li data-step="2"><span class="n">3</span> Fresh Lettuce</li>
+        <li data-step="3"><span class="n">4</span> Pico &amp; Peppers</li>
+        <li data-step="4"><span class="n">5</span> Crema &amp; Cilantro</li>
       </ul>
     </div>
-    <div class="quesadilla-stage">
-      <div class="quesadilla-layer tortilla-bottom" data-layer="0">
-        <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="tortillaGrad1" cx="35%" cy="32%" r="75%">
-              <stop offset="0%" stop-color="#f7e6bd"/>
-              <stop offset="100%" stop-color="#e3bf7a"/>
-            </radialGradient>
-          </defs>
-          <circle cx="230" cy="230" r="200" fill="url(#tortillaGrad1)" stroke="#c9a05c" stroke-width="6"/>
-          <circle cx="160" cy="150" r="7" fill="#a97c3f" opacity="0.3"/>
-          <circle cx="300" cy="170" r="6" fill="#a97c3f" opacity="0.3"/>
-          <circle cx="270" cy="300" r="7" fill="#a97c3f" opacity="0.25"/>
-          <circle cx="170" cy="310" r="5" fill="#a97c3f" opacity="0.3"/>
-          <circle cx="230" cy="230" r="6" fill="#a97c3f" opacity="0.2"/>
-          <circle cx="120" cy="230" r="5" fill="#a97c3f" opacity="0.25"/>
-          <circle cx="340" cy="260" r="5" fill="#a97c3f" opacity="0.25"/>
+    <div class="taco-stage">
+      <svg class="taco-shell-svg" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="shellGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f7d787"/>
+            <stop offset="100%" stop-color="#c9862f"/>
+          </linearGradient>
+        </defs>
+        <path d="M30,60 Q240,225 450,60 L450,102 Q240,265 30,102 Z" fill="url(#shellGrad)" stroke="#3d2410" stroke-width="6" stroke-linejoin="round"/>
+        <circle cx="120" cy="88" r="4" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="200" cy="108" r="3" fill="#8a5a20" opacity="0.4"/>
+        <circle cx="300" cy="104" r="4" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="365" cy="84" r="3" fill="#8a5a20" opacity="0.4"/>
+        <circle cx="160" cy="74" r="2.5" fill="#8a5a20" opacity="0.4"/>
+        <circle cx="330" cy="70" r="2.5" fill="#8a5a20" opacity="0.4"/>
+      </svg>
+
+      <div class="taco-layer meat" data-layer="0">
+        <svg viewBox="0 0 460 55" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M20,45 Q60,10 100,38 Q140,8 180,36 Q220,6 260,35 Q300,8 340,37 Q380,6 420,36 Q445,20 445,45 Z" fill="#7a3b20" stroke="#3d2410" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="70" cy="34" r="2.6" fill="#2b1508"/>
+          <circle cx="150" cy="28" r="2.6" fill="#2b1508"/>
+          <circle cx="230" cy="30" r="2.4" fill="#2b1508"/>
+          <circle cx="310" cy="28" r="2.6" fill="#2b1508"/>
+          <circle cx="390" cy="30" r="2.4" fill="#2b1508"/>
         </svg>
       </div>
 
-      <div class="quesadilla-layer cheese" data-layer="1">
-        <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g fill="#f2c94c" stroke="#c9862f" stroke-width="2">
-            <rect x="181" y="116" width="38" height="8" rx="4" transform="rotate(-10 200 120)"/>
-            <rect x="281" y="146" width="38" height="8" rx="4" transform="rotate(35 300 150)"/>
-            <rect x="311" y="236" width="38" height="8" rx="4" transform="rotate(80 330 240)"/>
-            <rect x="251" y="316" width="38" height="8" rx="4" transform="rotate(140 270 320)"/>
-            <rect x="151" y="296" width="38" height="8" rx="4" transform="rotate(190 170 300)"/>
-            <rect x="131" y="186" width="38" height="8" rx="4" transform="rotate(-40 150 190)"/>
-            <rect x="211" y="126" width="38" height="8" rx="4" transform="rotate(15 230 130)"/>
-            <rect x="251" y="256" width="38" height="8" rx="4" transform="rotate(110 270 260)"/>
-          </g>
-          <g fill="#ffdb70" stroke="#c9862f" stroke-width="2">
-            <rect x="211" y="46" width="40" height="8" rx="4" transform="rotate(5 230 50)"/>
-            <rect x="371" y="106" width="40" height="8" rx="4" transform="rotate(50 390 110)"/>
-            <rect x="391" y="276" width="40" height="8" rx="4" transform="rotate(100 410 280)"/>
-            <rect x="261" y="406" width="40" height="8" rx="4" transform="rotate(150 280 410)"/>
-            <rect x="81" y="366" width="40" height="8" rx="4" transform="rotate(210 100 370)"/>
-            <rect x="31" y="176" width="40" height="8" rx="4" transform="rotate(260 50 180)"/>
-          </g>
+      <div class="taco-layer cheese" data-layer="1">
+        <svg viewBox="0 0 460 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M25,35 Q65,8 105,30 Q145,6 185,28 Q225,8 265,30 Q305,6 345,28 Q385,8 425,32 Q440,20 440,35 Z" fill="#f2c94c" stroke="#c9862f" stroke-width="3.5" stroke-linejoin="round"/>
         </svg>
       </div>
 
-      <div class="quesadilla-layer meat" data-layer="2">
-        <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g fill="#7a3b20" stroke="#3d2410" stroke-width="3">
-            <ellipse cx="230" cy="150" rx="20" ry="13" transform="rotate(10 230 150)"/>
-            <ellipse cx="305" cy="185" rx="20" ry="13" transform="rotate(-20 305 185)"/>
-            <ellipse cx="290" cy="285" rx="20" ry="13" transform="rotate(35 290 285)"/>
-            <ellipse cx="205" cy="315" rx="20" ry="13" transform="rotate(-10 205 315)"/>
-            <ellipse cx="150" cy="225" rx="20" ry="13" transform="rotate(60 150 225)"/>
-          </g>
-          <g fill="#8a4526" stroke="#3d2410" stroke-width="3">
-            <ellipse cx="230" cy="45" rx="20" ry="13" transform="rotate(0 230 45)"/>
-            <ellipse cx="395" cy="150" rx="20" ry="13" transform="rotate(45 395 150)"/>
-            <ellipse cx="375" cy="335" rx="20" ry="13" transform="rotate(-30 375 335)"/>
-            <ellipse cx="175" cy="405" rx="20" ry="13" transform="rotate(20 175 405)"/>
-            <ellipse cx="60" cy="235" rx="20" ry="13" transform="rotate(-45 60 235)"/>
-          </g>
-          <circle cx="230" cy="150" r="2.4" fill="#2b1508"/>
-          <circle cx="290" cy="285" r="2.4" fill="#2b1508"/>
-          <circle cx="395" cy="150" r="2.4" fill="#2b1508"/>
-          <circle cx="175" cy="405" r="2.4" fill="#2b1508"/>
+      <div class="taco-layer lettuce" data-layer="2">
+        <svg viewBox="0 0 460 65" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M15,58 L45,15 L70,50 L95,10 L120,52 L145,8 L170,50 L195,12 L220,54 L245,8 L270,52 L295,12 L320,50 L345,10 L370,54 L395,14 L420,50 L445,30 L445,58 Z" fill="#5b8c3e" stroke="#33501f" stroke-width="4" stroke-linejoin="round"/>
         </svg>
       </div>
 
-      <div class="quesadilla-layer toppings" data-layer="3">
-        <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g stroke-width="2.5">
-            <rect x="176" y="106" width="46" height="12" rx="5" fill="#d1453b" stroke="#7a231d" transform="rotate(-15 199 112)"/>
-            <rect x="286" y="146" width="46" height="12" rx="5" fill="#4c7a3d" stroke="#2f4f26" transform="rotate(30 309 152)"/>
-            <rect x="316" y="266" width="46" height="12" rx="5" fill="#f2b134" stroke="#a8791f" transform="rotate(75 339 272)"/>
-            <rect x="216" y="336" width="46" height="12" rx="5" fill="#d1453b" stroke="#7a231d" transform="rotate(120 239 342)"/>
-            <rect x="106" y="296" width="46" height="12" rx="5" fill="#4c7a3d" stroke="#2f4f26" transform="rotate(200 129 302)"/>
-            <rect x="86" y="166" width="46" height="12" rx="5" fill="#f2b134" stroke="#a8791f" transform="rotate(250 109 172)"/>
+      <div class="taco-layer pico" data-layer="3">
+        <svg viewBox="0 0 460 55" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g fill="#d1453b" stroke="#7a231d" stroke-width="2.5">
+            <rect x="30" y="16" width="15" height="15" rx="2" transform="rotate(15 37 23)"/>
+            <rect x="115" y="10" width="15" height="15" rx="2" transform="rotate(-20 122 17)"/>
+            <rect x="225" y="14" width="15" height="15" rx="2" transform="rotate(20 232 21)"/>
+            <rect x="330" y="10" width="15" height="15" rx="2" transform="rotate(-15 337 17)"/>
+            <rect x="410" y="16" width="15" height="15" rx="2" transform="rotate(20 417 23)"/>
           </g>
           <g stroke-width="2.5">
-            <rect x="206" y="26" width="48" height="12" rx="5" fill="#d1453b" stroke="#7a231d" transform="rotate(5 230 32)"/>
-            <rect x="366" y="96" width="48" height="12" rx="5" fill="#f2b134" stroke="#a8791f" transform="rotate(55 390 102)"/>
-            <rect x="396" y="286" width="48" height="12" rx="5" fill="#4c7a3d" stroke="#2f4f26" transform="rotate(105 420 292)"/>
-            <rect x="216" y="416" width="48" height="12" rx="5" fill="#d1453b" stroke="#7a231d" transform="rotate(160 240 422)"/>
-            <rect x="56" y="346" width="48" height="12" rx="5" fill="#f2b134" stroke="#a8791f" transform="rotate(215 80 352)"/>
-            <rect x="26" y="156" width="48" height="12" rx="5" fill="#4c7a3d" stroke="#2f4f26" transform="rotate(265 50 162)"/>
-          </g>
-          <g fill="#f3e9f5" stroke="#c9a6d1" stroke-width="2" opacity="0.9">
-            <path d="M210,180 Q225,165 245,180 Q230,190 210,180 Z"/>
-            <path d="M290,220 Q305,205 325,220 Q310,230 290,220 Z" transform="rotate(60 305 220)"/>
-            <path d="M250,300 Q265,285 285,300 Q270,310 250,300 Z" transform="rotate(140 265 300)"/>
-            <path d="M160,290 Q175,275 195,290 Q180,300 160,290 Z" transform="rotate(220 175 290)"/>
-            <path d="M150,200 Q165,185 185,200 Q170,210 150,200 Z" transform="rotate(300 165 200)"/>
+            <rect x="65" y="8" width="42" height="11" rx="5" fill="#4c7a3d" stroke="#2f4f26" transform="rotate(-10 86 13)"/>
+            <rect x="170" y="26" width="42" height="11" rx="5" fill="#f2b134" stroke="#a8791f" transform="rotate(12 191 31)"/>
+            <rect x="270" y="8" width="42" height="11" rx="5" fill="#d1453b" stroke="#7a231d" transform="rotate(-8 291 13)"/>
+            <rect x="365" y="26" width="42" height="11" rx="5" fill="#4c7a3d" stroke="#2f4f26" transform="rotate(10 386 31)"/>
           </g>
           <g>
-            <circle cx="230" cy="270" r="11" fill="#5b8c3e" stroke="#33501f" stroke-width="2.5"/>
-            <circle cx="225" cy="266" r="1.6" fill="#e8e0c0"/>
-            <circle cx="234" cy="268" r="1.6" fill="#e8e0c0"/>
-            <circle cx="230" cy="274" r="1.6" fill="#e8e0c0"/>
-            <circle cx="330" cy="200" r="11" fill="#5b8c3e" stroke="#33501f" stroke-width="2.5"/>
-            <circle cx="325" cy="196" r="1.6" fill="#e8e0c0"/>
-            <circle cx="334" cy="198" r="1.6" fill="#e8e0c0"/>
-            <circle cx="330" cy="204" r="1.6" fill="#e8e0c0"/>
-            <circle cx="150" cy="270" r="11" fill="#5b8c3e" stroke="#33501f" stroke-width="2.5"/>
-            <circle cx="145" cy="266" r="1.6" fill="#e8e0c0"/>
-            <circle cx="154" cy="268" r="1.6" fill="#e8e0c0"/>
-            <circle cx="150" cy="274" r="1.6" fill="#e8e0c0"/>
+            <circle cx="150" cy="35" r="9" fill="#5b8c3e" stroke="#33501f" stroke-width="2.2"/>
+            <circle cx="146" cy="32" r="1.3" fill="#e8e0c0"/>
+            <circle cx="154" cy="33" r="1.3" fill="#e8e0c0"/>
+            <circle cx="150" cy="38" r="1.3" fill="#e8e0c0"/>
+            <circle cx="355" cy="35" r="9" fill="#5b8c3e" stroke="#33501f" stroke-width="2.2"/>
+            <circle cx="351" cy="32" r="1.3" fill="#e8e0c0"/>
+            <circle cx="359" cy="33" r="1.3" fill="#e8e0c0"/>
+            <circle cx="355" cy="38" r="1.3" fill="#e8e0c0"/>
           </g>
-          <g fill="#c93a2e" stroke="#7a231d" stroke-width="2">
-            <rect x="192" y="222" width="14" height="14" rx="2" transform="rotate(20 199 229)"/>
-            <rect x="262" y="242" width="14" height="14" rx="2" transform="rotate(-20 269 249)"/>
-            <rect x="210" y="180" width="14" height="14" rx="2" transform="rotate(45 217 187)"/>
-            <rect x="120" y="230" width="14" height="14" rx="2" transform="rotate(-30 127 237)"/>
-            <rect x="300" y="270" width="14" height="14" rx="2" transform="rotate(15 307 277)"/>
-            <rect x="180" y="310" width="14" height="14" rx="2" transform="rotate(-10 187 317)"/>
-          </g>
-          <g fill="#3f6b2a">
-            <circle cx="240" cy="200" r="3"/>
-            <circle cx="270" cy="230" r="3"/>
-            <circle cx="200" cy="250" r="3"/>
-            <circle cx="230" cy="290" r="3"/>
-            <circle cx="180" cy="200" r="3"/>
-            <circle cx="290" cy="190" r="3"/>
-            <circle cx="160" cy="240" r="3"/>
-            <circle cx="310" cy="250" r="3"/>
-            <circle cx="220" cy="160" r="3"/>
-            <circle cx="260" cy="310" r="3"/>
+          <g fill="#f3e9f5" stroke="#c9a6d1" stroke-width="1.8" opacity="0.9">
+            <path d="M50,38 Q60,30 72,38 Q62,44 50,38 Z"/>
+            <path d="M255,38 Q265,30 277,38 Q267,44 255,38 Z"/>
           </g>
         </svg>
       </div>
 
-      <div class="quesadilla-layer tortilla-top" data-layer="4">
-        <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="tortillaGrad2" cx="35%" cy="32%" r="75%">
-              <stop offset="0%" stop-color="#f7e6bd"/>
-              <stop offset="100%" stop-color="#e3bf7a"/>
-            </radialGradient>
-            <clipPath id="topClip">
-              <circle cx="230" cy="230" r="175"/>
-            </clipPath>
-          </defs>
-          <circle cx="230" cy="230" r="175" fill="url(#tortillaGrad2)" stroke="#c9a05c" stroke-width="6"/>
-          <g clip-path="url(#topClip)" stroke="#a97c3f" stroke-width="10" opacity="0.22">
-            <line x1="70" y1="110" x2="390" y2="430"/>
-            <line x1="120" y1="60" x2="440" y2="380"/>
-            <line x1="170" y1="20" x2="470" y2="320"/>
-            <line x1="20" y1="170" x2="320" y2="470"/>
-          </g>
+      <div class="taco-layer crema" data-layer="4">
+        <svg viewBox="0 0 460 45" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M25,20 Q70,4 115,18 T205,16 T295,18 T385,14 T435,20" fill="none" stroke="#f7f2e6" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
+          <circle cx="90" cy="30" r="3" fill="#3f6b2a"/>
+          <circle cx="140" cy="34" r="2.6" fill="#3f6b2a"/>
+          <circle cx="190" cy="28" r="3" fill="#3f6b2a"/>
+          <circle cx="240" cy="34" r="2.6" fill="#3f6b2a"/>
+          <circle cx="290" cy="28" r="3" fill="#3f6b2a"/>
+          <circle cx="340" cy="34" r="2.6" fill="#3f6b2a"/>
+          <circle cx="390" cy="28" r="3" fill="#3f6b2a"/>
+          <circle cx="115" cy="24" r="2" fill="#3f6b2a"/>
+          <circle cx="215" cy="24" r="2" fill="#3f6b2a"/>
+          <circle cx="315" cy="24" r="2" fill="#3f6b2a"/>
         </svg>
       </div>
+
+      <svg class="taco-shell-front-svg" viewBox="0 0 480 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20,10 Q240,95 460,10 L460,32 Q240,120 20,32 Z" fill="url(#shellGrad)" stroke="#3d2410" stroke-width="5" stroke-linejoin="round"/>
+        <circle cx="140" cy="20" r="3" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="240" cy="26" r="3" fill="#8a5a20" opacity="0.5"/>
+        <circle cx="340" cy="20" r="3" fill="#8a5a20" opacity="0.5"/>
+      </svg>
     </div>
   </div>
 </section>
@@ -1606,7 +1573,7 @@
     progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + '%';
   }
   var assembly = document.getElementById('assembly-pin');
-  var quesadillaLayers = assembly ? assembly.querySelectorAll('.quesadilla-layer') : [];
+  var tacoLayers = assembly ? assembly.querySelectorAll('.taco-layer') : [];
   var assemblySteps = assembly ? assembly.querySelectorAll('.assembly-steps li') : [];
 
   function updateAssembly() {
@@ -1616,16 +1583,16 @@
     var progress = scrollableDist > 0 ? -rect.top / scrollableDist : 0;
     progress = Math.min(Math.max(progress, 0), 1);
 
-    var stageCount = quesadillaLayers.length;
+    var stageCount = tacoLayers.length;
     var activeIndex = Math.min(Math.floor(progress * stageCount), stageCount - 1);
 
-    quesadillaLayers.forEach(function (layer, i) {
+    tacoLayers.forEach(function (layer, i) {
       var stageStart = i / stageCount;
       var stageEnd = (i + 1) / stageCount;
       var local = (progress - stageStart) / (stageEnd - stageStart);
       local = Math.min(Math.max(local, 0), 1);
       var eased = 1 - Math.pow(1 - local, 3);
-      layer.style.transform = 'translate(-50%, calc(-50% - ' + (220 * (1 - eased)) + 'px))';
+      layer.style.transform = 'translate(-50%, ' + (-160 * (1 - eased)) + 'px)';
       layer.style.opacity = eased;
     });
 
